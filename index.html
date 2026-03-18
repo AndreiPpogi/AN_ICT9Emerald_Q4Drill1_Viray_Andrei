@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q4 Drill 1</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #d9d2b6, #c2b98f);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .box {
+            background-color: #1f2a35;
+            padding: 20px;
+            border-radius: 20px;
+            display: inline-block;
+            color: white;
+        }
+
+        input {
+            margin: 10px;
+            padding: 5px;
+        }
+
+        .btn-custom {
+            background-color: gold;
+            border: none;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Electricity Consumption Classifier</h1>
+    <p>Enter your electricity usage (kWh) to know your category.</p>
+
+    <div class="box">
+        <h3>kWh</h3>
+        <input type="number" id="kwhInput" placeholder="Enter kWh">
+        <br>
+        <button class="btn btn-custom" onclick="classify()">Consumption Classification</button>
+        <p id="result"></p>
+        <p id="errorMsg" class="error"></p>
+    </div>
+
+    <br><br>
+
+    <h2>Classification Guide</h2>
+    <p>0–100 = Lifeline Consumer</p>
+    <p>101–200 = Low Consumption</p>
+    <p>201–300 = Average Consumption</p>
+    <p>301–500 = High Consumption</p>
+    <p>Above 500 = Very High Consumption</p>
+
+    <script>
+        function classify() {
+
+            let kwh = document.getElementById("kwhInput").value;
+
+            kwh = Number(kwh);
+
+            document.getElementById("errorMsg").innerHTML = "";
+            document.getElementById("result").innerHTML = "";
+
+            if (kwh < 0) {
+                document.getElementById("errorMsg").innerHTML = "Please input a non-negative number.";
+            }
+
+            else {
+                let category = "";
+
+                if (kwh <= 100) {
+                    category = "Lifeline Consumer - Discounted rates";
+                }
+                else if (kwh <= 200) {
+                    category = "Low Consumption - Normal rate";
+                }
+                else if (kwh <= 300) {
+                    category = "Average Consumption - Typical usage";
+                }
+                else if (kwh <= 500) {
+                    category = "High Consumption - Higher usage";
+                }
+                else {
+                    category = "Very High Consumption - Heavy user";
+                }
+
+                alert("Category: " + category);
+                document.getElementById("result").innerHTML = category;
+            }
+        }
+    </script>
+
+    <br><br>
+
+    <p>Source: <a href="https://www.meralco.com.ph" target="_blank">Meralco Website</a></p>
+
+</body>
+</html>
